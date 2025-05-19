@@ -4,25 +4,25 @@ import { Star, Quote } from 'lucide-react';
 const Testimonials = () => {
   const testimonials = [
     {
-      name: 'David Kimani',
-      role: 'Business Traveler',
+      name: 'James Mwangi',
+      role: 'Business Executive',
       avatar: 'https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-      quote: 'I\'ve been using JKIA Express for my business trips for over a year now. Their service is consistently excellent, and the drivers are always punctual and professional.',
+      quote: 'As a frequent business traveler, JKIA Express has become my go-to airport taxi service. Their executive service is exceptional, and the drivers are always professional and punctual.',
       rating: 5
     },
     {
-      name: 'Sarah Wanjiku',
-      role: 'Tourist',
-      avatar: 'https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-      quote: 'As a first-time visitor to Kenya, I was relieved to find such a reliable taxi service. My driver was knowledgeable about the city and made me feel safe and comfortable.',
-      rating: 5
-    },
-    {
-      name: 'Michael Odhiambo',
+      name: 'Alice Wambui',
       role: 'Corporate Client',
+      avatar: 'https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      quote: 'The reliability and professionalism of JKIA Express is unmatched. Their drivers are well-trained and courteous, making every journey comfortable and safe.',
+      rating: 5
+    },
+    {
+      name: 'Peter Omondi',
+      role: 'Regular Customer',
       avatar: 'https://images.pexels.com/photos/1516680/pexels-photo-1516680.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-      quote: 'We use JKIA Express for all our corporate transportation needs. They provide excellent service for our international clients and are always reliable.',
-      rating: 4
+      quote: 'I appreciate their transparent pricing and the option to use M-Pesa for payments. The loyalty program is a great bonus for frequent users like me.',
+      rating: 5
     }
   ];
 
@@ -46,7 +46,7 @@ const Testimonials = () => {
       }}
     >
       <div className="container mx-auto px-4 md:px-6">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">What Our Customers Say</h2>
           <div className="w-24 h-1 bg-yellow-500 mx-auto"></div>
         </div>
@@ -65,7 +65,7 @@ const Testimonials = () => {
                         <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-yellow-500 opacity-30">
                           <Quote size={80} />
                         </div>
-                        <div className="w-24 h-24 rounded-full overflow-hidden mx-auto border-4 border-yellow-500">
+                        <div className="w-24 h-24 rounded-full overflow-hidden mx-auto border-4 border-yellow-500 transform hover:scale-105 transition-transform duration-300">
                           <img 
                             src={testimonial.avatar} 
                             alt={testimonial.name} 
@@ -74,13 +74,13 @@ const Testimonials = () => {
                         </div>
                       </div>
                       <div className="max-w-2xl mx-auto">
-                        <p className="text-xl italic mb-6">{testimonial.quote}</p>
+                        <p className="text-xl italic mb-6 animate-fade-in">{testimonial.quote}</p>
                         <div className="flex justify-center mb-4">
                           {[...Array(5)].map((_, i) => (
                             <Star 
                               key={i} 
                               size={24} 
-                              className={i < testimonial.rating ? "text-yellow-500" : "text-gray-400"} 
+                              className={`${i < testimonial.rating ? "text-yellow-500" : "text-gray-400"} transform hover:scale-110 transition-transform duration-300`}
                               fill={i < testimonial.rating ? "#eab308" : "none"} 
                             />
                           ))}
@@ -99,7 +99,7 @@ const Testimonials = () => {
                 <button
                   key={index}
                   onClick={() => setCurrentIndex(index)}
-                  className={`h-3 w-3 rounded-full transition-all duration-300 ${index === currentIndex ? 'bg-yellow-500 w-8' : 'bg-white bg-opacity-30'}`}
+                  className={`h-3 w-3 rounded-full transition-all duration-300 transform hover:scale-110 ${index === currentIndex ? 'bg-yellow-500 w-8' : 'bg-white bg-opacity-30'}`}
                   aria-label={`Go to testimonial ${index + 1}`}
                 />
               ))}

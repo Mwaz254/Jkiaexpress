@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin, Send } from 'lucide-react';
+import { Phone, Mail, MapPin, Send, CreditCard } from 'lucide-react';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -11,23 +11,24 @@ const Contact = () => {
     date: '',
     time: '',
     passengers: '',
-    message: ''
+    message: '',
+    expressway: false
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
+    const { name, value, type } = e.target;
+    const checked = (e.target as HTMLInputElement).checked;
+    
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: type === 'checkbox' ? checked : value
     }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real application, this would send the form data to a server
     console.log('Form submitted:', formData);
     alert('Thank you for your booking request! We will contact you shortly to confirm your reservation.');
-    // Reset form
     setFormData({
       name: '',
       email: '',
@@ -37,7 +38,8 @@ const Contact = () => {
       date: '',
       time: '',
       passengers: '',
-      message: ''
+      message: '',
+      expressway: false
     });
   };
 
@@ -55,8 +57,8 @@ const Contact = () => {
           <div className="lg:col-span-2">
             <div className="bg-white p-8 rounded-lg shadow-lg">
               <h3 className="text-2xl font-bold text-blue-900 mb-6">Booking Request</h3>
-              <form onSubmit={handleSubmit}>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Full Name*</label>
                     <input
@@ -83,7 +85,7 @@ const Contact = () => {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone Number*</label>
                     <input
@@ -118,7 +120,7 @@ const Contact = () => {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="pickupLocation" className="block text-sm font-medium text-gray-700 mb-1">Pickup Location*</label>
                     <input
@@ -145,7 +147,7 @@ const Contact = () => {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="date" className="block text-sm font-medium text-gray-700 mb-1">Date*</label>
                     <input
@@ -172,7 +174,21 @@ const Contact = () => {
                   </div>
                 </div>
 
-                <div className="mb-6">
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="expressway"
+                    name="expressway"
+                    checked={formData.expressway}
+                    onChange={handleChange}
+                    className="h-4 w-4 text-blue-900 focus:ring-blue-900 border-gray-300 rounded"
+                  />
+                  <label htmlFor="expressway" className="ml-2 block text-sm text-gray-700">
+                    Use Nairobi Expressway (Additional charges apply)
+                  </label>
+                </div>
+
+                <div>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Additional Information</label>
                   <textarea
                     id="message"
@@ -187,7 +203,7 @@ const Contact = () => {
 
                 <button
                   type="submit"
-                  className="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold px-8 py-4 rounded-lg transition-all duration-300 flex items-center"
+                  className="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold px-8 py-4 rounded-lg transition-all duration-300 flex items-center justify-center hover:scale-105"
                 >
                   Book Now
                   <Send size={18} className="ml-2" />
@@ -223,6 +239,15 @@ const Contact = () => {
                     </p>
                   </div>
                 </div>
+
+                <div className="flex items-start">
+                  <CreditCard className="w-5 h-5 text-yellow-500 mr-4 mt-1" />
+                  <div>
+                    <p className="font-medium">Payment Methods</p>
+                    <p className="mt-1">M-Pesa Till: 123456</p>
+                    <p>Cash & Card Payments</p>
+                  </div>
+                </div>
                 
                 <div className="flex items-start">
                   <MapPin className="w-5 h-5 text-yellow-500 mr-4 mt-1" />
@@ -240,14 +265,16 @@ const Contact = () => {
               </div>
               
               <div className="mt-8">
-                <a 
-                  href="https://maps.app.goo.gl/LDPJgNDMfGr2Kgic8" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="bg-white text-blue-900 hover:bg-yellow-500 transition-colors font-bold px-6 py-3 rounded-lg inline-block mt-4 w-full text-center"
-                >
-                  View on Map
-                </a>
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.8197563127266!2d36.92113511475856!3d-1.3196591990363!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f11e225e25c5f%3A0x737d6e9e7722a1b7!2sJomo%20Kenyatta%20International%20Airport!5e0!3m2!1sen!2sus!4v1647856732345!5m2!1sen!2sus"
+                  width="100%"
+                  height="200"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="rounded-lg"
+                ></iframe>
               </div>
             </div>
           </div>
