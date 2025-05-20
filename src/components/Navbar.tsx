@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Phone } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Logo from './Logo';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,12 +26,13 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'Home', href: '/' },
-    { name: 'Services', href: '/#services' },
-    { name: 'About', href: '/#about' },
-    { name: 'Fleet', href: '/#fleet' },
-    { name: 'Rates', href: '/#rates' },
-    { name: 'FAQ', href: '/#faq' },
-    { name: 'Contact', href: '/#contact' },
+    { name: 'Services', href: '/services' },
+    { name: 'About', href: '/about' },
+    { name: 'Fleet', href: '/fleet' },
+    { name: 'Executive', href: '/executive' },
+    { name: 'Rates', href: '/rates' },
+    { name: 'FAQ', href: '/faq' },
+    { name: 'Contact', href: '/contact' },
   ];
 
   return (
@@ -48,7 +50,9 @@ const Navbar = () => {
                 <li key={link.name}>
                   <Link 
                     to={link.href} 
-                    className={`font-medium hover:text-yellow-500 transition-colors ${scrolled ? 'text-blue-900' : 'text-white'}`}
+                    className={`font-medium hover:text-yellow-500 transition-colors ${
+                      scrolled ? 'text-blue-900' : 'text-white'
+                    } ${location.pathname === link.href ? 'text-yellow-500' : ''}`}
                   >
                     {link.name}
                   </Link>
@@ -86,7 +90,9 @@ const Navbar = () => {
                   <Link 
                     to={link.href} 
                     onClick={() => setIsOpen(false)}
-                    className="block font-medium text-blue-900 hover:text-yellow-500 transition-colors"
+                    className={`block font-medium text-blue-900 hover:text-yellow-500 transition-colors ${
+                      location.pathname === link.href ? 'text-yellow-500' : ''
+                    }`}
                   >
                     {link.name}
                   </Link>

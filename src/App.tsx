@@ -1,16 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Services from './components/Services';
-import About from './components/About';
-import Fleet from './components/Fleet';
-import Testimonials from './components/Testimonials';
+import Footer from './components/Footer';
+import Home from './pages/Home';
+import ServicesPage from './pages/ServicesPage';
+import AboutPage from './pages/AboutPage';
+import FleetPage from './pages/FleetPage';
+import Executive from './components/Executive';
 import Rates from './components/Rates';
 import Faq from './components/Faq';
 import Contact from './components/Contact';
-import Footer from './components/Footer';
-import Executive from './components/Executive';
 
 function App() {
   return (
@@ -18,24 +17,17 @@ function App() {
       <div className="font-poppins">
         <Navbar />
         <Routes>
-          <Route path="/" element={
-            <>
-              <Hero />
-              <Services />
-              <About />
-              <Fleet />
-              <Testimonials />
-              <Rates />
-              <Faq />
-              <Contact />
-            </>
-          } />
+          <Route path="/" element={<Home />} />
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/fleet" element={<FleetPage />} />
           <Route path="/executive" element={<Executive />} />
+          <Route path="/rates" element={<Rates />} />
+          <Route path="/faq" element={<Faq />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
         <Footer />
       </div>
     </Router>
   );
 }
-
-export default App;
