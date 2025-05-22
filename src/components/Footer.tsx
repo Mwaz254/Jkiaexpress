@@ -16,13 +16,31 @@ const Footer = () => {
               Your trusted taxi service at Jomo Kenyatta International Airport, providing safe and comfortable transportation services throughout Nairobi and beyond.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="bg-blue-800 hover:bg-yellow-500 hover:text-blue-900 w-10 h-10 rounded-full flex items-center justify-center transition-colors">
+              <a 
+                href="https://facebook.com/jkiaexpress" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="bg-blue-800 hover:bg-yellow-500 hover:text-blue-900 w-10 h-10 rounded-full flex items-center justify-center transition-colors"
+                aria-label="Follow us on Facebook"
+              >
                 <Facebook size={20} />
               </a>
-              <a href="#" className="bg-blue-800 hover:bg-yellow-500 hover:text-blue-900 w-10 h-10 rounded-full flex items-center justify-center transition-colors">
+              <a 
+                href="https://twitter.com/jkiaexpress" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="bg-blue-800 hover:bg-yellow-500 hover:text-blue-900 w-10 h-10 rounded-full flex items-center justify-center transition-colors"
+                aria-label="Follow us on Twitter"
+              >
                 <Twitter size={20} />
               </a>
-              <a href="#" className="bg-blue-800 hover:bg-yellow-500 hover:text-blue-900 w-10 h-10 rounded-full flex items-center justify-center transition-colors">
+              <a 
+                href="https://instagram.com/jkiaexpress" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="bg-blue-800 hover:bg-yellow-500 hover:text-blue-900 w-10 h-10 rounded-full flex items-center justify-center transition-colors"
+                aria-label="Follow us on Instagram"
+              >
                 <Instagram size={20} />
               </a>
             </div>
