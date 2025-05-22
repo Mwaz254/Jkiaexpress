@@ -10,6 +10,7 @@ import Executive from './components/Executive';
 import Rates from './components/Rates';
 import Faq from './components/Faq';
 import Contact from './components/Contact';
+import Auth from './components/Auth';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/rates" element={<Rates />} />
           <Route path="/faq" element={<Faq />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<Auth />} />
         </Routes>
         <Footer />
       </div>
@@ -32,4 +34,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
