@@ -21,6 +21,7 @@ const SecureContact = () => {
   const [errors, setErrors] = useState<string[]>([]);
   const [honeypot, setHoneypot] = useState('');
   const [submitAttempts, setSubmitAttempts] = useState(0);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
 
   useEffect(() => {
     // Generate CSRF token on component mount
@@ -85,10 +86,33 @@ const SecureContact = () => {
         throw new Error('Maximum submission attempts exceeded');
       }
 
-      // Simulate form submission (replace with actual API call)
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Create form data for Netlify
+      const netlifyFormData = new FormData();
+      netlifyFormData.append('form-name', 'booking-request');
+      netlifyFormData.append('name', formData.name);
+      netlifyFormData.append('email', formData.email);
+      netlifyFormData.append('phone', formData.phone);
+      netlifyFormData.append('pickup-location', formData.pickupLocation);
+      netlifyFormData.append('dropoff-location', formData.dropoffLocation);
+      netlifyFormData.append('date', formData.date);
+      netlifyFormData.append('time', formData.time);
+      netlifyFormData.append('passengers', formData.passengers);
+      netlifyFormData.append('message', formData.message);
+      netlifyFormData.append('expressway', formData.expressway.toString());
+      netlifyFormData.append('csrf_token', csrfToken);
 
-      alert('Thank you for your booking request! We will contact you shortly to confirm your reservation.');
+      // Submit to Netlify
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(netlifyFormData as any).toString()
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit booking request');
+      }
+
+      setSubmitSuccess(true);
       
       // Reset form
       setFormData({
@@ -116,6 +140,52 @@ const SecureContact = () => {
       setIsSubmitting(false);
     }
   };
+
+  if (submitSuccess) {
+    return (
+      <section id="contact" className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="max-w-2xl mx-auto text-center">
+            <div className="bg-white p-8 rounded-lg shadow-lg border border-green-200">
+              <div className="flex items-center justify-center gap-2 mb-6">
+                <Shield className="h-12 w-12 text-green-500" />
+                <div>
+                  <h2 className="text-3xl font-bold text-green-600">Booking Submitted!</h2>
+                  <p className="text-gray-600 mt-2">
+                    Thank you for your booking request. We will contact you shortly to confirm your reservation.
+                  </p>
+                </div>
+              </div>
+              
+              <div className="space-y-4 text-left bg-gray-50 p-6 rounded-lg">
+                <h3 className="font-bold text-blue-900">What happens next?</h3>
+                <ul className="space-y-2 text-gray-600">
+                  <li>• We'll call you within 30 minutes to confirm details</li>
+                  <li>• You'll receive an SMS confirmation with driver details</li>
+                  <li>• Our driver will contact you 15 minutes before pickup</li>
+                </ul>
+              </div>
+
+              <div className="mt-6 flex flex-col sm:flex-row gap-4">
+                <button
+                  onClick={() => setSubmitSuccess(false)}
+                  className="bg-blue-900 hover:bg-blue-800 text-white font-bold px-6 py-3 rounded-lg transition-all duration-300"
+                >
+                  Make Another Booking
+                </button>
+                <a
+                  href="tel:+254745667165"
+                  className="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold px-6 py-3 rounded-lg transition-all duration-300 text-center"
+                >
+                  Call Us Now
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="contact" className="py-20 bg-gray-50">
@@ -149,17 +219,30 @@ const SecureContact = () => {
                 </div>
               )}
 
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form 
+                name="booking-request" 
+                method="POST" 
+                data-netlify="true" 
+                data-netlify-honeypot="website"
+                onSubmit={handleSubmit} 
+                className="space-y-6"
+              >
+                {/* Netlify form detection */}
+                <input type="hidden" name="form-name" value="booking-request" />
+
                 {/* Honeypot field - hidden from users */}
-                <input
-                  type="text"
-                  name="website"
-                  value={honeypot}
-                  onChange={(e) => setHoneypot(e.target.value)}
-                  style={{ display: 'none' }}
-                  tabIndex={-1}
-                  autoComplete="off"
-                />
+                <div style={{ display: 'none' }}>
+                  <label>
+                    Don't fill this out if you're human:
+                    <input
+                      name="website"
+                      value={honeypot}
+                      onChange={(e) => setHoneypot(e.target.value)}
+                      tabIndex={-1}
+                      autoComplete="off"
+                    />
+                  </label>
+                </div>
 
                 {/* CSRF Token */}
                 <input type="hidden" name="csrf_token" value={csrfToken} />
@@ -238,7 +321,7 @@ const SecureContact = () => {
                     <input
                       type="text"
                       id="pickupLocation"
-                      name="pickupLocation"
+                      name="pickup-location"
                       required
                       maxLength={200}
                       value={formData.pickupLocation}
@@ -251,7 +334,7 @@ const SecureContact = () => {
                     <input
                       type="text"
                       id="dropoffLocation"
-                      name="dropoffLocation"
+                      name="dropoff-location"
                       required
                       maxLength={200}
                       value={formData.dropoffLocation}
