@@ -9,8 +9,8 @@ import FleetPage from './pages/FleetPage';
 import Executive from './components/Executive';
 import Rates from './components/Rates';
 import Faq from './components/Faq';
-import Contact from './components/Contact';
-import Auth from './components/Auth';
+import SecureContact from './components/SecureContact';
+import SecureAuth from './components/SecureAuth';
 
 function App() {
   return (
@@ -25,8 +25,8 @@ function App() {
           <Route path="/executive" element={<Executive />} />
           <Route path="/rates" element={<Rates />} />
           <Route path="/faq" element={<Faq />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/login" element={<Auth />} />
+          <Route path="/contact" element={<SecureContact />} />
+          <Route path="/login" element={<SecureAuth />} />
         </Routes>
         <Footer />
       </div>

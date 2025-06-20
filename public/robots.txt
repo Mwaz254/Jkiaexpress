@@ -1,0 +1,16 @@
+# Robots.txt for JKIA Express
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /.env
+Disallow: /config/
+Disallow: /src/
+Disallow: /node_modules/
+
+# Prevent crawling of sensitive areas
+Disallow: /*?*csrf*
+Disallow: /*?*token*
+Disallow: /*?*session*
+
+Sitemap: https://regal-starship-40d663.netlify.app/sitemap.xml
