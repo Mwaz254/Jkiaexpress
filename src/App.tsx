@@ -1,36 +1,52 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import ErrorBoundary from './components/ErrorBoundary';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import Home from './pages/Home';
-import ServicesPage from './pages/ServicesPage';
-import AboutPage from './pages/AboutPage';
-import FleetPage from './pages/FleetPage';
-import Executive from './components/Executive';
-import Rates from './components/Rates';
-import Faq from './components/Faq';
-import SecureContact from './components/SecureContact';
-import SecureAuth from './components/SecureAuth';
+
+// Lazy load components for better performance
+const Home = lazy(() => import('./pages/Home'));
+const ServicesPage = lazy(() => import('./pages/ServicesPage'));
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const FleetPage = lazy(() => import('./pages/FleetPage'));
+const Executive = lazy(() => import('./components/Executive'));
+const Rates = lazy(() => import('./components/Rates'));
+const Faq = lazy(() => import('./components/Faq'));
+const EnhancedSecureContact = lazy(() => import('./components/EnhancedSecureContact'));
+const SecureAuth = lazy(() => import('./components/SecureAuth'));
+const UserDashboard = lazy(() => import('./components/UserDashboard'));
+
+// Loading component
+const LoadingSpinner = () => (
+  <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-900"></div>
+  </div>
+);
 
 function App() {
   return (
-    <Router>
-      <div className="font-poppins">
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/services" element={<ServicesPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/fleet" element={<FleetPage />} />
-          <Route path="/executive" element={<Executive />} />
-          <Route path="/rates" element={<Rates />} />
-          <Route path="/faq" element={<Faq />} />
-          <Route path="/contact" element={<SecureContact />} />
-          <Route path="/login" element={<SecureAuth />} />
-        </Routes>
-        <Footer />
-      </div>
-    </Router>
+    <ErrorBoundary>
+      <Router>
+        <div className="font-poppins">
+          <Navbar />
+          <Suspense fallback={<LoadingSpinner />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/services" element={<ServicesPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/fleet" element={<FleetPage />} />
+              <Route path="/executive" element={<Executive />} />
+              <Route path="/rates" element={<Rates />} />
+              <Route path="/faq" element={<Faq />} />
+              <Route path="/contact" element={<EnhancedSecureContact />} />
+              <Route path="/login" element={<SecureAuth />} />
+              <Route path="/dashboard" element={<UserDashboard />} />
+            </Routes>
+          </Suspense>
+          <Footer />
+        </div>
+      </Router>
+    </ErrorBoundary>
   );
 }
 

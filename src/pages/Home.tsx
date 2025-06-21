@@ -6,7 +6,7 @@ import Fleet from '../components/Fleet';
 import Testimonials from '../components/Testimonials';
 import Rates from '../components/Rates';
 import Faq from '../components/Faq';
-import SecureContact from '../components/SecureContact';
+import EnhancedSecureContact from '../components/EnhancedSecureContact';
 
 const Home = () => {
   return (
@@ -18,7 +18,7 @@ const Home = () => {
       <Testimonials />
       <Rates />
       <Faq />
-      <SecureContact />
+      <EnhancedSecureContact />
     </>
   );
 };

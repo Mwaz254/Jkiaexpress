@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Phone, Home, Car, Info, Users, Crown, DollarSign, HelpCircle, PhoneCall, LogIn } from 'lucide-react';
+import { Menu, X, Phone, Home, Car, Info, Users, Crown, DollarSign, HelpCircle, PhoneCall, LogIn, User } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from './Logo';
 import { supabase } from '../lib/supabase';
@@ -87,12 +87,23 @@ const Navbar = () => {
                   <span>0745 667 165</span>
                 </a>
                 {user ? (
-                  <button
-                    onClick={handleSignOut}
-                    className="bg-yellow-500 text-blue-900 px-4 py-2 rounded-lg font-medium hover:bg-yellow-600 transition-colors"
-                  >
-                    Sign Out
-                  </button>
+                  <div className="flex items-center space-x-2">
+                    <Link
+                      to="/dashboard"
+                      className={`flex items-center font-medium ${
+                        scrolled ? 'text-blue-900' : 'text-white'
+                      } hover:text-yellow-500 transition-colors`}
+                    >
+                      <User size={18} className="mr-2" />
+                      Dashboard
+                    </Link>
+                    <button
+                      onClick={handleSignOut}
+                      className="bg-yellow-500 text-blue-900 px-4 py-2 rounded-lg font-medium hover:bg-yellow-600 transition-colors"
+                    >
+                      Sign Out
+                    </button>
+                  </div>
                 ) : (
                   <Link
                     to="/login"
@@ -144,17 +155,28 @@ const Navbar = () => {
                   </li>
                 ))}
                 {user ? (
-                  <li>
-                    <button
-                      onClick={() => {
-                        handleSignOut();
-                        setIsOpen(false);
-                      }}
-                      className="w-full text-left px-6 py-3 font-medium rounded-lg transition-colors text-blue-900 hover:bg-gray-50"
-                    >
-                      Sign Out
-                    </button>
-                  </li>
+                  <>
+                    <li>
+                      <Link
+                        to="/dashboard"
+                        onClick={() => setIsOpen(false)}
+                        className="block px-6 py-3 font-medium rounded-lg transition-colors text-blue-900 hover:bg-gray-50"
+                      >
+                        Dashboard
+                      </Link>
+                    </li>
+                    <li>
+                      <button
+                        onClick={() => {
+                          handleSignOut();
+                          setIsOpen(false);
+                        }}
+                        className="w-full text-left px-6 py-3 font-medium rounded-lg transition-colors text-blue-900 hover:bg-gray-50"
+                      >
+                        Sign Out
+                      </button>
+                    </li>
+                  </>
                 ) : (
                   <li>
                     <Link

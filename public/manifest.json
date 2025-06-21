@@ -1,0 +1,27 @@
+{
+  "name": "JKIA Express - Premium Airport Taxi Service",
+  "short_name": "JKIA Express",
+  "description": "Premium airport taxi service in Nairobi, Kenya. Reliable, safe, and comfortable transportation from JKIA.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1e3a8a",
+  "theme_color": "#eab308",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "categories": ["travel", "transportation", "business"],
+  "lang": "en",
+  "dir": "ltr"
+}
