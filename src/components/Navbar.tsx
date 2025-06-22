@@ -80,11 +80,12 @@ const Navbar = () => {
               </ul>
               <div className="flex items-center space-x-4">
                 <a 
-                  href="tel:+254745667165" 
+                  href="tel:+254731050573" 
                   className={`flex items-center font-medium ${scrolled ? 'text-blue-900' : 'text-white'} hover:text-yellow-500 transition-colors`}
+                  aria-label="Call JKIA Express primary number"
                 >
                   <Phone size={18} className="mr-2" />
-                  <span>0745 667 165</span>
+                  <span>0731 050 573</span>
                 </a>
                 {user ? (
                   <div className="flex items-center space-x-2">
@@ -124,6 +125,7 @@ const Navbar = () => {
               className={`md:hidden p-2 rounded-lg ${
                 scrolled ? 'text-blue-900 hover:bg-gray-100' : 'text-white hover:bg-white/10'
               } focus:outline-none transition-colors`}
+              aria-label="Toggle mobile menu"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -191,18 +193,20 @@ const Navbar = () => {
               </ul>
               <div className="mt-6 px-6 pt-6 border-t border-gray-100">
                 <a 
-                  href="tel:+254745667165" 
-                  className="flex items-center justify-center gap-2 w-full bg-blue-900 text-white font-bold py-3 rounded-lg hover:bg-blue-800 transition-colors"
-                >
-                  <Phone size={18} />
-                  <span>0745 667 165</span>
-                </a>
-                <a 
                   href="tel:+254731050573" 
-                  className="flex items-center justify-center gap-2 w-full mt-3 border-2 border-blue-900 text-blue-900 font-bold py-3 rounded-lg hover:bg-blue-50 transition-colors"
+                  className="flex items-center justify-center gap-2 w-full bg-blue-900 text-white font-bold py-3 rounded-lg hover:bg-blue-800 transition-colors mb-3"
+                  aria-label="Call JKIA Express primary number"
                 >
                   <Phone size={18} />
                   <span>0731 050 573</span>
+                </a>
+                <a 
+                  href="tel:+254745667165" 
+                  className="flex items-center justify-center gap-2 w-full border-2 border-blue-900 text-blue-900 font-bold py-3 rounded-lg hover:bg-blue-50 transition-colors"
+                  aria-label="Call JKIA Express alternative number"
+                >
+                  <Phone size={18} />
+                  <span>0745 667 165</span>
                 </a>
               </div>
             </div>
@@ -222,6 +226,7 @@ const Navbar = () => {
                   ? 'text-yellow-500'
                   : 'text-blue-900'
               }`}
+              aria-label={`Navigate to ${link.name}`}
             >
               {link.icon}
               <span className="text-xs mt-1">{link.name}</span>

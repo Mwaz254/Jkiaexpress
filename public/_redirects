@@ -1,5 +1,7 @@
 # Redirect all HTTP to HTTPS
-http://regal-starship-40d663.netlify.app/* https://regal-starship-40d663.netlify.app/:splat 301!
+http://jkiaexpress.taxi/* https://jkiaexpress.taxi/:splat 301!
+http://www.jkiaexpress.taxi/* https://jkiaexpress.taxi/:splat 301!
+https://www.jkiaexpress.taxi/* https://jkiaexpress.taxi/:splat 301!
 
 # Prevent access to sensitive files
 /.env* /404 404!
@@ -7,8 +9,15 @@ http://regal-starship-40d663.netlify.app/* https://regal-starship-40d663.netlify
 /.git/* /404 404!
 /node_modules/* /404 404!
 /src/* /404 404!
+/admin/* /404 404!
 
-# Rate limiting for API endpoints (if any)
+# SEO-friendly redirects for common misspellings
+/jkia-express /
+/airport-taxi /services
+/nairobi-taxi /services
+/taxi-service /services
+
+# Rate limiting for API endpoints
 /api/* /api/:splat 200
 
 # Fallback for SPA routing

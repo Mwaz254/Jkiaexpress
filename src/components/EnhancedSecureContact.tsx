@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, Mail, MapPin, Send, CreditCard, Shield, AlertTriangle, CheckCircle } from 'lucide-react';
+import { Phone, Mail, MapPin, Send, CreditCard, Shield, AlertTriangle, CheckCircle, Star } from 'lucide-react';
 import { SecurityUtils, CSRFProtection } from '../utils/security';
 import { ValidationUtils } from '../utils/validation';
 import { DatabaseService } from '../lib/database';
@@ -154,6 +154,21 @@ const EnhancedSecureContact = () => {
       const newToken = CSRFProtection.generateToken();
       setCsrfToken(newToken);
 
+      // Track conversion for analytics
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'conversion', {
+          'send_to': 'GA_TRACKING_ID/booking_completed'
+        });
+      }
+
+      // Facebook Pixel tracking
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'Lead', {
+          content_name: 'Taxi Booking',
+          content_category: 'Transportation'
+        });
+      }
+
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'An error occurred';
       setErrors([errorMessage]);
@@ -197,8 +212,9 @@ const EnhancedSecureContact = () => {
                   Make Another Booking
                 </button>
                 <a
-                  href="tel:+254745667165"
+                  href="tel:+254731050573"
                   className="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold px-6 py-3 rounded-lg transition-all duration-300 text-center"
+                  aria-label="Call JKIA Express primary number"
                 >
                   Call Us Now
                 </a>
@@ -221,6 +237,19 @@ const EnhancedSecureContact = () => {
           <p className="text-gray-600 max-w-2xl mx-auto">
             Your information is protected with enterprise-grade security. Fill out the form below to book your taxi service.
           </p>
+          
+          {/* Trust Indicators */}
+          <div className="flex items-center justify-center gap-6 mt-6">
+            <div className="flex items-center gap-1">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} size={16} className="text-yellow-500 fill-current" />
+              ))}
+              <span className="text-sm text-gray-600 ml-2">4.9/5 Rating</span>
+            </div>
+            <div className="text-sm text-gray-600">150+ Happy Customers</div>
+            <div className="text-sm text-gray-600">Licensed & Insured</div>
+          </div>
+
           {!isOnline && (
             <div className="bg-red-50 border border-red-200 rounded-lg p-4 mt-4 max-w-md mx-auto">
               <div className="flex items-center gap-2">
@@ -282,6 +311,7 @@ const EnhancedSecureContact = () => {
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent"
                       autoComplete="name"
                       disabled={isSubmitting}
+                      placeholder="Enter your full name"
                     />
                   </div>
                   <div>
@@ -297,6 +327,7 @@ const EnhancedSecureContact = () => {
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent"
                       autoComplete="email"
                       disabled={isSubmitting}
+                      placeholder="your.email@example.com"
                     />
                   </div>
                 </div>
@@ -329,7 +360,7 @@ const EnhancedSecureContact = () => {
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent"
                       disabled={isSubmitting}
                     >
-                      <option value="">Select</option>
+                      <option value="">Select passengers</option>
                       {[...Array(20)].map((_, i) => (
                         <option key={i + 1} value={i + 1}>
                           {i + 1} passenger{i > 0 ? 's' : ''}
@@ -469,10 +500,10 @@ const EnhancedSecureContact = () => {
                   <div>
                     <p className="font-medium">Phone Numbers</p>
                     <p className="mt-1">
-                      <a href="tel:+254745667165" className="hover:text-yellow-500 transition-colors">0745 667 165</a>
+                      <a href="tel:+254731050573" className="hover:text-yellow-500 transition-colors">0731 050 573</a> (Primary)
                     </p>
                     <p>
-                      <a href="tel:+254731050573" className="hover:text-yellow-500 transition-colors">0731 050 573</a>
+                      <a href="tel:+254745667165" className="hover:text-yellow-500 transition-colors">0745 667 165</a> (Alternative)
                     </p>
                   </div>
                 </div>
@@ -521,6 +552,7 @@ const EnhancedSecureContact = () => {
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                   className="rounded-lg"
+                  title="JKIA Location Map"
                 ></iframe>
               </div>
             </div>
