@@ -3,6 +3,7 @@
 export class SecurityUtils {
   // Sanitize user input to prevent XSS
   static sanitizeInput(input: string): string {
+    if (typeof input !== 'string') return '';
     const div = document.createElement('div');
     div.textContent = input;
     return div.innerHTML;
@@ -22,9 +23,14 @@ export class SecurityUtils {
 
   // Generate secure random string
   static generateSecureToken(length: number = 32): string {
-    const array = new Uint8Array(length);
-    crypto.getRandomValues(array);
-    return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
+    if (typeof crypto !== 'undefined' && crypto.getRandomValues) {
+      const array = new Uint8Array(length);
+      crypto.getRandomValues(array);
+      return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
+    } else {
+      // Fallback for environments without crypto
+      return Math.random().toString(36).substring(2, length + 2);
+    }
   }
 
   // Rate limiting for form submissions
@@ -48,14 +54,18 @@ export class SecurityUtils {
 
   // Detect potential bot behavior
   static detectBot(): boolean {
-    // Check for common bot indicators
-    const userAgent = navigator.userAgent.toLowerCase();
-    const botPatterns = [
-      'bot', 'crawler', 'spider', 'scraper', 'headless',
-      'phantom', 'selenium', 'puppeteer'
-    ];
-    
-    return botPatterns.some(pattern => userAgent.includes(pattern));
+    try {
+      // Check for common bot indicators
+      const userAgent = navigator.userAgent.toLowerCase();
+      const botPatterns = [
+        'bot', 'crawler', 'spider', 'scraper', 'headless',
+        'phantom', 'selenium', 'puppeteer'
+      ];
+      
+      return botPatterns.some(pattern => userAgent.includes(pattern));
+    } catch (error) {
+      return false;
+    }
   }
 
   // Validate form data integrity
@@ -109,13 +119,23 @@ export class CSRFProtection {
 
   static generateToken(): string {
     this.token = SecurityUtils.generateSecureToken();
-    sessionStorage.setItem('csrf_token', this.token);
+    try {
+      sessionStorage.setItem('csrf_token', this.token);
+    } catch (error) {
+      // Fallback if sessionStorage is not available
+      console.warn('SessionStorage not available, using memory storage');
+    }
     return this.token;
   }
 
   static getToken(): string | null {
     if (!this.token) {
-      this.token = sessionStorage.getItem('csrf_token');
+      try {
+        this.token = sessionStorage.getItem('csrf_token');
+      } catch (error) {
+        // Fallback if sessionStorage is not available
+        console.warn('SessionStorage not available');
+      }
     }
     return this.token;
   }
@@ -127,6 +147,11 @@ export class CSRFProtection {
 
   static clearToken(): void {
     this.token = null;
-    sessionStorage.removeItem('csrf_token');
+    try {
+      sessionStorage.removeItem('csrf_token');
+    } catch (error) {
+      // Fallback if sessionStorage is not available
+      console.warn('SessionStorage not available');
+    }
   }
 }

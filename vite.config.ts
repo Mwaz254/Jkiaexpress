@@ -28,11 +28,17 @@ export default defineConfig({
     }
   },
   server: {
+    host: true,
+    port: 5173,
     headers: {
       'X-Frame-Options': 'SAMEORIGIN',
       'X-Content-Type-Options': 'nosniff',
       'X-XSS-Protection': '1; mode=block',
       'Referrer-Policy': 'strict-origin-when-cross-origin'
     }
+  },
+  preview: {
+    host: true,
+    port: 4173
   }
 });

@@ -1,7 +1,4 @@
-# Redirect all HTTP to HTTPS
-http://jkiaexpress.taxi/* https://jkiaexpress.taxi/:splat 301!
-http://www.jkiaexpress.taxi/* https://jkiaexpress.taxi/:splat 301!
-https://www.jkiaexpress.taxi/* https://jkiaexpress.taxi/:splat 301!
+# Netlify redirects and rewrites
 
 # Prevent access to sensitive files
 /.env* /404 404!

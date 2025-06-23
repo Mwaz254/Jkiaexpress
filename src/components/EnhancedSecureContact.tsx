@@ -26,9 +26,14 @@ const EnhancedSecureContact = () => {
   const [submitAttempts, setSubmitAttempts] = useState(0);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [user, setUser] = useState<any>(null);
-  const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const [isOnline, setIsOnline] = useState(true);
 
   useEffect(() => {
+    // Check if we're in a browser environment
+    if (typeof window !== 'undefined') {
+      setIsOnline(navigator.onLine);
+    }
+
     // Generate CSRF token on component mount
     const token = CSRFProtection.generateToken();
     setCsrfToken(token);
@@ -42,19 +47,23 @@ const EnhancedSecureContact = () => {
           email: user.email || ''
         }));
       }
+    }).catch(error => {
+      console.warn('Auth error:', error);
     });
 
     // Monitor online status
     const handleOnline = () => setIsOnline(true);
     const handleOffline = () => setIsOnline(false);
     
-    window.addEventListener('online', handleOnline);
-    window.addEventListener('offline', handleOffline);
+    if (typeof window !== 'undefined') {
+      window.addEventListener('online', handleOnline);
+      window.addEventListener('offline', handleOffline);
 
-    return () => {
-      window.removeEventListener('online', handleOnline);
-      window.removeEventListener('offline', handleOffline);
-    };
+      return () => {
+        window.removeEventListener('online', handleOnline);
+        window.removeEventListener('offline', handleOffline);
+      };
+    }
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -92,7 +101,7 @@ const EnhancedSecureContact = () => {
       }
 
       // Rate limiting check
-      const clientId = `${navigator.userAgent}_${window.location.hostname}`;
+      const clientId = typeof window !== 'undefined' ? `${navigator.userAgent}_${window.location.hostname}` : 'unknown';
       if (!SecurityUtils.checkRateLimit(clientId, 3, 300000)) {
         throw new Error('Too many submission attempts. Please wait 5 minutes before trying again.');
       }
@@ -155,15 +164,15 @@ const EnhancedSecureContact = () => {
       setCsrfToken(newToken);
 
       // Track conversion for analytics
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'conversion', {
+      if (typeof window !== 'undefined' && typeof (window as any).gtag !== 'undefined') {
+        (window as any).gtag('event', 'conversion', {
           'send_to': 'GA_TRACKING_ID/booking_completed'
         });
       }
 
       // Facebook Pixel tracking
-      if (typeof fbq !== 'undefined') {
-        fbq('track', 'Lead', {
+      if (typeof window !== 'undefined' && typeof (window as any).fbq !== 'undefined') {
+        (window as any).fbq('track', 'Lead', {
           content_name: 'Taxi Booking',
           content_category: 'Transportation'
         });
