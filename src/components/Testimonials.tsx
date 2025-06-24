@@ -40,7 +40,7 @@ const Testimonials = () => {
     <section 
       className="py-20 bg-blue-900 text-white"
       style={{ 
-        backgroundImage: "linear-gradient(rgba(30, 58, 138, 0.9), rgba(30, 58, 138, 0.9)), url('https://images.pexels.com/photos/1005638/pexels-photo-1005638.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')",
+        backgroundImage: "linear-gradient(rgba(30, 58, 138, 0.9), rgba(30, 58, 138, 0.9)), url('https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')",
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       }}

@@ -63,8 +63,8 @@ const About = () => {
           <div className="order-1 md:order-2 relative">
             <div className="relative h-[400px] md:h-[500px] rounded-lg overflow-hidden transform hover:scale-[1.02] transition-transform duration-300">
               <img 
-                src="https://images.pexels.com/photos/889839/pexels-photo-889839.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
-                alt="JKIA Express Taxi Service" 
+                src="https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
+                alt="Nairobi City Night Skyline" 
                 className="w-full h-full object-cover object-center rounded-lg"
               />
               <div className="absolute bottom-0 left-0 bg-blue-900 text-white py-4 px-6 rounded-tr-lg">
