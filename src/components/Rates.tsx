@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Check, HelpCircle } from 'lucide-react';
+import { Check, HelpCircle, ArrowRight } from 'lucide-react';
 
 const Rates = () => {
   const [showTooltip, setShowTooltip] = useState(false);
@@ -101,13 +101,14 @@ const Rates = () => {
                 <a 
                   href="#contact" 
                   className={`
-                    w-full text-center font-bold px-6 py-3 rounded-lg transition-all duration-300 block
+                    w-full text-center font-bold px-6 py-3 rounded-lg transition-all duration-300 block flex items-center justify-center
                     ${card.highlighted ? 
                       'bg-yellow-500 hover:bg-yellow-600 text-blue-900' : 
                       'bg-blue-900 hover:bg-blue-800 text-white'}
                   `}
                 >
                   Book Now
+                  <ArrowRight size={16} className="ml-2" />
                 </a>
               </div>
             </div>
