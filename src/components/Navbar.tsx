@@ -27,19 +27,35 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
-    });
+    // Only try to get session if supabase is properly configured
+    const loadUser = async () => {
+      try {
+        if (supabase && typeof supabase.auth?.getSession === 'function') {
+          const { data: { session } } = await supabase.auth.getSession();
+          setUser(session?.user ?? null);
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
-    });
+          const { data: { subscription } } = supabase.auth.onAuthStateChange((_event: any, session: any) => {
+            setUser(session?.user ?? null);
+          });
 
-    return () => subscription.unsubscribe();
+          return () => subscription.unsubscribe();
+        }
+      } catch (error) {
+        console.warn('Auth state loading failed:', error);
+      }
+    };
+
+    loadUser();
   }, []);
 
   const handleSignOut = async () => {
-    await supabase.auth.signOut();
+    try {
+      if (supabase && typeof supabase.auth?.signOut === 'function') {
+        await supabase.auth.signOut();
+      }
+    } catch (error) {
+      console.warn('Sign out failed:', error);
+    }
   };
 
   const navLinks = [
