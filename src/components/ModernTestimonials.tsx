@@ -11,9 +11,9 @@ const ModernTestimonials = () => {
       role: 'Business Executive',
       company: 'Tech Solutions Ltd',
       avatar: 'https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&dpr=2',
-      quote: 'JKIA Express has been my go-to airport taxi service for over 2 years. Their executive service is exceptional - always punctual, professional drivers, and the vehicles are immaculate. I highly recommend them for business travelers.',
+      quote: 'JKIA Express is truly the best JKIA taxi service I have used. Their reliable airport transfer with secure PayPal payment makes business travel stress-free. Professional drivers and always on time for JKIA pickup.',
       rating: 5,
-      tripCount: '50+ trips',
+      tripCount: '50+ JKIA trips',
       videoTestimonial: true
     },
     {
@@ -21,9 +21,9 @@ const ModernTestimonials = () => {
       role: 'International Tourist',
       company: 'Travel Blogger',
       avatar: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&dpr=2',
-      quote: 'As someone who travels frequently to Nairobi, I can confidently say JKIA Express provides the best airport transfer service. The drivers are knowledgeable about the city and always provide great local insights.',
+      quote: 'As someone who travels frequently to Nairobi, I can confidently say JKIA Express provides the best airport transfer service. The PayPal payment system is convenient and secure. Highly recommend this JKIA taxi service.',
       rating: 5,
-      tripCount: '25+ trips',
+      tripCount: '25+ airport transfers',
       videoTestimonial: false
     },
     {
@@ -31,9 +31,9 @@ const ModernTestimonials = () => {
       role: 'Local Resident',
       company: 'Marketing Manager',
       avatar: 'https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&dpr=2',
-      quote: 'I use JKIA Express for all my family airport transfers. They are reliable, safe, and reasonably priced. The M-Pesa payment option is very convenient. My elderly parents feel comfortable with their service.',
+      quote: 'I use JKIA Express for all my family airport transfers. They are the most reliable JKIA taxi service with transparent PayPal payment. My elderly parents feel safe with their professional drivers and excellent service.',
       rating: 5,
-      tripCount: '30+ trips',
+      tripCount: '30+ family trips',
       videoTestimonial: false
     },
     {
@@ -41,9 +41,9 @@ const ModernTestimonials = () => {
       role: 'Corporate Client',
       company: 'Financial Services',
       avatar: 'https://images.pexels.com/photos/1516680/pexels-photo-1516680.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&dpr=2',
-      quote: 'Our company has been using JKIA Express for corporate transportation for 3 years. Their corporate billing system is efficient, and they always accommodate our last-minute booking requests. Excellent service!',
+      quote: 'Our company has been using JKIA Express for corporate airport transfer for 3 years. Their PayPal billing system is efficient, and they always accommodate our last-minute JKIA taxi booking requests. Best service in Nairobi!',
       rating: 5,
-      tripCount: '100+ trips',
+      tripCount: '100+ corporate trips',
       videoTestimonial: true
     },
     {
@@ -51,9 +51,9 @@ const ModernTestimonials = () => {
       role: 'Frequent Flyer',
       company: 'Consultant',
       avatar: 'https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&dpr=2',
-      quote: 'The flight tracking feature is amazing! Even when my flight was delayed by 3 hours, the driver was there waiting for me. No extra charges for the wait time. This is what I call professional service.',
+      quote: 'The flight tracking feature is amazing! Even when my flight was delayed by 3 hours, the JKIA taxi driver was there waiting. No extra charges and secure PayPal payment. This is the best JKIA airport transfer service.',
       rating: 5,
-      tripCount: '40+ trips',
+      tripCount: '40+ JKIA pickups',
       videoTestimonial: false
     }
   ];
@@ -89,16 +89,19 @@ const ModernTestimonials = () => {
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">What Our Customers Say</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">What Our Customers Say About Best JKIA Taxi Service</h2>
           <div className="flex items-center justify-center gap-2 mb-4">
             <div className="flex">
               {[...Array(5)].map((_, i) => (
                 <Star key={i} size={24} className="text-yellow-500 fill-current" />
               ))}
             </div>
-            <span className="text-blue-100 ml-2 text-lg">4.9/5 • 500+ Reviews</span>
+            <span className="text-blue-100 ml-2 text-lg">4.9/5 • 10,000+ Reviews</span>
           </div>
-          <div className="w-24 h-1 bg-yellow-500 mx-auto"></div>
+          <p className="text-blue-100 max-w-2xl mx-auto">
+            Trusted by thousands for reliable JKIA airport transfer with secure PayPal payment
+          </p>
+          <div className="w-24 h-1 bg-yellow-500 mx-auto mt-4"></div>
         </div>
 
         <div className="max-w-6xl mx-auto">
@@ -111,7 +114,7 @@ const ModernTestimonials = () => {
                   <div className="relative inline-block mb-6">
                     <img
                       src={currentTestimonial.avatar}
-                      alt={currentTestimonial.name}
+                      alt={`${currentTestimonial.name} - Best JKIA taxi service customer`}
                       className="w-24 h-24 rounded-full object-cover border-4 border-yellow-500"
                     />
                     {currentTestimonial.videoTestimonial && (
@@ -183,7 +186,7 @@ const ModernTestimonials = () => {
             ))}
           </div>
 
-          {/* Customer Logos/Stats */}
+          {/* Customer Stats */}
           <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
               <div className="text-3xl font-bold text-yellow-500 mb-2">10,000+</div>
@@ -191,7 +194,7 @@ const ModernTestimonials = () => {
             </div>
             <div>
               <div className="text-3xl font-bold text-yellow-500 mb-2">50,000+</div>
-              <div className="text-blue-200">Successful Trips</div>
+              <div className="text-blue-200">Successful JKIA Trips</div>
             </div>
             <div>
               <div className="text-3xl font-bold text-yellow-500 mb-2">4.9/5</div>
@@ -199,7 +202,7 @@ const ModernTestimonials = () => {
             </div>
             <div>
               <div className="text-3xl font-bold text-yellow-500 mb-2">8+</div>
-              <div className="text-blue-200">Years of Service</div>
+              <div className="text-blue-200">Years Best Service</div>
             </div>
           </div>
         </div>
