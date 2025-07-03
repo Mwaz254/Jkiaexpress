@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, Phone, Star, Play, CheckCircle, MapPin, Clock } from 'lucide-react';
+import { ArrowRight, Phone, Star, Play, CheckCircle, MapPin, Clock, CreditCard } from 'lucide-react';
 
 const EnhancedHero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -8,21 +8,21 @@ const EnhancedHero = () => {
   const heroSlides = [
     {
       image: "https://images.pexels.com/photos/1595232/pexels-photo-1595232.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=2",
-      title: "Premium Airport Taxi Service",
-      subtitle: "Professional, Safe & Reliable Transportation from JKIA",
-      cta: "Book Your Ride"
+      title: "Best JKIA Taxi Service",
+      subtitle: "Reliable Airport Transfer Nairobi with Secure PayPal Payment",
+      cta: "Book JKIA Taxi Now"
     },
     {
       image: "https://images.pexels.com/photos/2834653/pexels-photo-2834653.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=2",
-      title: "Executive Transportation",
-      subtitle: "Luxury Vehicles for Business Travelers & VIP Guests",
-      cta: "View Executive Fleet"
+      title: "Trusted JKIA Pickup",
+      subtitle: "Professional Nairobi Airport Taxi with PayPal Secure Payment",
+      cta: "Book Reliable JKIA Transfer"
     },
     {
       image: "https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=2",
-      title: "24/7 Available Service",
-      subtitle: "Round-the-Clock Airport Transfers Throughout Nairobi",
-      cta: "Call Now"
+      title: "24/7 JKIA Taxi Service",
+      subtitle: "Best Airport Transfer Kenya with Online PayPal Booking",
+      cta: "Call JKIA Taxi Now"
     }
   ];
 
@@ -34,10 +34,10 @@ const EnhancedHero = () => {
   }, []);
 
   const quickStats = [
-    { icon: <Star className="h-5 w-5" />, text: "4.9/5 Rating" },
-    { icon: <CheckCircle className="h-5 w-5" />, text: "10k+ Customers" },
-    { icon: <Clock className="h-5 w-5" />, text: "24/7 Service" },
-    { icon: <MapPin className="h-5 w-5" />, text: "All Nairobi Areas" }
+    { icon: <Star className="h-5 w-5" />, text: "4.9/5 Best JKIA Taxi" },
+    { icon: <CheckCircle className="h-5 w-5" />, text: "10k+ Happy Customers" },
+    { icon: <Clock className="h-5 w-5" />, text: "24/7 JKIA Service" },
+    { icon: <CreditCard className="h-5 w-5" />, text: "PayPal Secure Payment" }
   ];
 
   return (
@@ -96,7 +96,7 @@ const EnhancedHero = () => {
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                <span className="text-sm font-medium">Fixed Transparent Rates</span>
+                <span className="text-sm font-medium">PayPal Secure Payment</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
@@ -104,7 +104,7 @@ const EnhancedHero = () => {
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                <span className="text-sm font-medium">M-Pesa Payments</span>
+                <span className="text-sm font-medium">24/7 JKIA Pickup</span>
               </div>
             </div>
 
@@ -113,7 +113,7 @@ const EnhancedHero = () => {
               <a 
                 href="/contact" 
                 className="bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-blue-900 font-bold px-8 py-4 rounded-xl transition-all duration-300 flex items-center justify-center hover:scale-105 group shadow-lg"
-                aria-label="Book a taxi ride with JKIA Express"
+                aria-label="Book best JKIA taxi with PayPal payment"
               >
                 {heroSlides[currentSlide].cta}
                 <ArrowRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
@@ -124,16 +124,16 @@ const EnhancedHero = () => {
                 className="border-2 border-white hover:bg-white hover:text-blue-900 text-white font-bold px-8 py-4 rounded-xl transition-all duration-300 flex items-center justify-center hover:scale-105 group"
               >
                 <Play size={20} className="mr-2 group-hover:scale-110 transition-transform" />
-                Watch Our Story
+                Watch JKIA Taxi Story
               </button>
               
               <a 
                 href="tel:+254731050573" 
                 className="bg-blue-900/80 backdrop-blur-sm hover:bg-blue-800 text-white font-bold px-8 py-4 rounded-xl transition-all duration-300 flex items-center justify-center hover:scale-105 group"
-                aria-label="Call JKIA Express now for immediate booking"
+                aria-label="Call best JKIA taxi service now - 0731050573"
               >
                 <Phone size={20} className="mr-2 group-hover:scale-110 transition-transform" />
-                Call Now
+                Call JKIA Taxi
               </a>
             </div>
 
@@ -142,7 +142,7 @@ const EnhancedHero = () => {
               <div className="flex items-center">
                 <div className="h-12 w-1 bg-yellow-500 mr-4"></div>
                 <div>
-                  <p className="text-yellow-500 font-medium text-sm">Primary Number</p>
+                  <p className="text-yellow-500 font-medium text-sm">Best JKIA Taxi Hotline</p>
                   <p className="text-white font-bold text-lg">
                     <a href="tel:+254731050573" className="hover:text-yellow-500 transition-colors">
                       0731 050 573
@@ -153,10 +153,10 @@ const EnhancedHero = () => {
               <div className="flex items-center">
                 <div className="h-12 w-1 bg-yellow-500 mr-4"></div>
                 <div>
-                  <p className="text-yellow-500 font-medium text-sm">Alternative</p>
+                  <p className="text-yellow-500 font-medium text-sm">PayPal Secure Payment</p>
                   <p className="text-white font-bold text-lg">
-                    <a href="tel:+254745667165" className="hover:text-yellow-500 transition-colors">
-                      0745 667 165
+                    <a href="mailto:cymohmwaz@yahoo.com" className="hover:text-yellow-500 transition-colors">
+                      cymohmwaz@yahoo.com
                     </a>
                   </p>
                 </div>
@@ -185,7 +185,7 @@ const EnhancedHero = () => {
         <a 
           href="#services" 
           className="text-white hover:text-yellow-500 transition-colors p-2"
-          aria-label="Scroll down to view our services"
+          aria-label="Scroll down to view JKIA taxi services"
         >
           <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
@@ -198,7 +198,7 @@ const EnhancedHero = () => {
         <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-xl p-6 max-w-4xl w-full">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xl font-bold text-blue-900">About JKIA Express</h3>
+              <h3 className="text-xl font-bold text-blue-900">About JKIA Express - Best JKIA Taxi Service</h3>
               <button
                 onClick={() => setShowVideo(false)}
                 className="text-gray-500 hover:text-gray-700"
@@ -207,7 +207,7 @@ const EnhancedHero = () => {
               </button>
             </div>
             <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
-              <p className="text-gray-600">Video content would be embedded here</p>
+              <p className="text-gray-600">Best JKIA taxi service video content would be embedded here</p>
             </div>
           </div>
         </div>

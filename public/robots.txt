@@ -1,4 +1,4 @@
-# Robots.txt for JKIA Express - Optimized for SEO
+# Robots.txt for JKIA Express - Best JKIA Taxi Service - Optimized for SEO
 User-agent: *
 Allow: /
 Disallow: /admin/
@@ -16,7 +16,7 @@ Disallow: /*?*token*
 Disallow: /*?*session*
 Disallow: /*?*auth*
 
-# Allow important files
+# Allow important files for best JKIA taxi service
 Allow: /sitemap.xml
 Allow: /robots.txt
 Allow: /manifest.json
@@ -32,7 +32,7 @@ Allow: /*.webp
 # Crawl delay for better server performance
 Crawl-delay: 1
 
-# Sitemap location
+# Sitemap location for best JKIA taxi service
 Sitemap: https://jkiaexpress.taxi/sitemap.xml
 
 # Special instructions for major search engines
@@ -47,3 +47,13 @@ Crawl-delay: 1
 User-agent: Slurp
 Allow: /
 Crawl-delay: 1
+
+# Additional directives for JKIA taxi service SEO
+User-agent: *
+# Allow crawling of JKIA taxi service pages
+Allow: /services
+Allow: /about
+Allow: /fleet
+Allow: /rates
+Allow: /contact
+Allow: /faq

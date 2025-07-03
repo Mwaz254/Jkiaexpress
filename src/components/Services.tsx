@@ -5,23 +5,23 @@ const Services = () => {
   const services = [
     {
       icon: <Car className="h-12 w-12 text-yellow-500" />,
-      title: 'Airport Transfers',
-      description: 'Reliable and punctual airport pickup and drop-off services from JKIA to any destination in Nairobi and beyond.'
+      title: 'Best JKIA Airport Transfer',
+      description: 'Reliable and punctual JKIA airport pickup and drop-off services to any destination in Nairobi and beyond with secure PayPal payment.'
     },
     {
       icon: <UserCheck className="h-12 w-12 text-yellow-500" />,
-      title: 'Professional Drivers',
-      description: 'Our experienced, vetted drivers ensure your safety and comfort throughout your journey.'
+      title: 'Professional JKIA Taxi Drivers',
+      description: 'Our experienced, vetted drivers ensure your safety and comfort throughout your Nairobi airport taxi journey.'
     },
     {
       icon: <Clock className="h-12 w-12 text-yellow-500" />,
-      title: '24/7 Availability',
-      description: 'Available around the clock for all your transportation needs, including late-night airport pickups.'
+      title: '24/7 JKIA Taxi Service',
+      description: 'Available around the clock for all your JKIA transportation needs, including late-night airport pickups with reliable service.'
     },
     {
       icon: <CreditCard className="h-12 w-12 text-yellow-500" />,
-      title: 'Flexible Payment',
-      description: 'Multiple payment options available, including cash, mobile money, and card payments for your convenience.'
+      title: 'PayPal Secure Payment',
+      description: 'Secure PayPal payment processing for your safety and convenience. No cash handling means better security for everyone.'
     }
   ];
 
@@ -29,9 +29,9 @@ const Services = () => {
     <section id="services" className="py-20 bg-white">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-4">Our Premium Services</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-4">Best JKIA Taxi Services</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Experience comfortable and reliable transportation with our range of premium taxi services.
+            Experience the best JKIA taxi service with comfortable and reliable airport transfer with secure PayPal payment options.
           </p>
         </div>
 
@@ -48,6 +48,15 @@ const Services = () => {
               <p className="text-gray-600">{service.description}</p>
             </div>
           ))}
+        </div>
+
+        <div className="text-center mt-12">
+          <a 
+            href="/contact" 
+            className="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold px-8 py-4 rounded-lg transition-all duration-300 inline-block"
+          >
+            Book Best JKIA Taxi Now
+          </a>
         </div>
       </div>
     </section>

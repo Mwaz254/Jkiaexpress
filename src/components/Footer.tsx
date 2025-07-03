@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, ExternalLink } from 'lucide-react';
+import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, ExternalLink, CreditCard } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -13,7 +13,8 @@ const Footer = () => {
               JKIA<span className="text-yellow-500">Express</span>
             </h3>
             <p className="mb-6 text-gray-300">
-              Your trusted taxi service at Jomo Kenyatta International Airport, providing safe and comfortable transportation services throughout Nairobi and beyond.
+              Best JKIA taxi service in Nairobi. Reliable airport transfer with secure PayPal payment. 
+              Trusted by 10,000+ customers for safe and comfortable transportation.
             </p>
             <div className="flex space-x-4">
               <a 
@@ -21,8 +22,8 @@ const Footer = () => {
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="bg-blue-800 hover:bg-yellow-500 hover:text-blue-900 w-10 h-10 rounded-full flex items-center justify-center transition-colors group"
-                aria-label="Follow JKIA Express on Facebook"
-                title="Follow us on Facebook"
+                aria-label="Follow JKIA Express on Facebook - Best JKIA Taxi Service"
+                title="Best JKIA Taxi on Facebook"
               >
                 <Facebook size={20} className="group-hover:scale-110 transition-transform" />
               </a>
@@ -31,8 +32,8 @@ const Footer = () => {
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="bg-blue-800 hover:bg-yellow-500 hover:text-blue-900 w-10 h-10 rounded-full flex items-center justify-center transition-colors group"
-                aria-label="Follow JKIA Express on Twitter"
-                title="Follow us on Twitter"
+                aria-label="Follow JKIA Express on Twitter - Reliable Airport Taxi"
+                title="JKIA Taxi Updates on Twitter"
               >
                 <Twitter size={20} className="group-hover:scale-110 transition-transform" />
               </a>
@@ -41,8 +42,8 @@ const Footer = () => {
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="bg-blue-800 hover:bg-yellow-500 hover:text-blue-900 w-10 h-10 rounded-full flex items-center justify-center transition-colors group"
-                aria-label="Follow JKIA Express on Instagram"
-                title="Follow us on Instagram"
+                aria-label="Follow JKIA Express on Instagram - Nairobi Airport Taxi"
+                title="JKIA Taxi Photos on Instagram"
               >
                 <Instagram size={20} className="group-hover:scale-110 transition-transform" />
               </a>
@@ -50,49 +51,57 @@ const Footer = () => {
           </div>
           
           <div>
-            <h4 className="text-lg font-bold mb-6">Quick Links</h4>
+            <h4 className="text-lg font-bold mb-6">JKIA Taxi Services</h4>
             <ul className="space-y-3">
               <li>
-                <a href="/" className="text-gray-300 hover:text-yellow-500 transition-colors">Home</a>
+                <a href="/" className="text-gray-300 hover:text-yellow-500 transition-colors">JKIA Taxi Home</a>
               </li>
               <li>
-                <a href="/services" className="text-gray-300 hover:text-yellow-500 transition-colors">Services</a>
+                <a href="/services" className="text-gray-300 hover:text-yellow-500 transition-colors">Airport Transfer Services</a>
               </li>
               <li>
-                <a href="/about" className="text-gray-300 hover:text-yellow-500 transition-colors">About Us</a>
+                <a href="/about" className="text-gray-300 hover:text-yellow-500 transition-colors">About Best JKIA Taxi</a>
               </li>
               <li>
-                <a href="/fleet" className="text-gray-300 hover:text-yellow-500 transition-colors">Our Fleet</a>
+                <a href="/fleet" className="text-gray-300 hover:text-yellow-500 transition-colors">Reliable Taxi Fleet</a>
               </li>
               <li>
-                <a href="/rates" className="text-gray-300 hover:text-yellow-500 transition-colors">Rates</a>
+                <a href="/rates" className="text-gray-300 hover:text-yellow-500 transition-colors">JKIA Taxi Rates</a>
               </li>
               <li>
-                <a href="/contact" className="text-gray-300 hover:text-yellow-500 transition-colors">Contact</a>
+                <a href="/contact" className="text-gray-300 hover:text-yellow-500 transition-colors">Book JKIA Taxi</a>
               </li>
             </ul>
           </div>
           
           <div>
-            <h4 className="text-lg font-bold mb-6">Contact Info</h4>
+            <h4 className="text-lg font-bold mb-6">Contact Best JKIA Taxi</h4>
             <ul className="space-y-4">
               <li className="flex items-start">
                 <Phone className="w-5 h-5 text-yellow-500 mr-3 mt-1" />
                 <div>
-                  <p className="font-medium">Primary: <a href="tel:+254731050573" className="hover:text-yellow-500 transition-colors">0731 050 573</a></p>
-                  <p className="text-sm text-gray-300">Alternative: <a href="tel:+254745667165" className="hover:text-yellow-500 transition-colors">0745 667 165</a></p>
+                  <p className="font-medium">24/7 JKIA Taxi Hotline</p>
+                  <p className="mt-1">
+                    <a href="tel:+254731050573" className="hover:text-yellow-500 transition-colors text-lg font-bold">0731 050 573</a>
+                  </p>
+                  <p className="text-sm text-gray-300">Best JKIA taxi contact</p>
                 </div>
               </li>
               <li className="flex items-start">
                 <Mail className="w-5 h-5 text-yellow-500 mr-3 mt-1" />
                 <div>
-                  <a href="mailto:info@jkiaexpress.co.ke" className="hover:text-yellow-500 transition-colors">info@jkiaexpress.co.ke</a>
+                  <p className="font-medium">Email & PayPal</p>
+                  <p className="mt-1">
+                    <a href="mailto:cymohmwaz@yahoo.com" className="hover:text-yellow-500 transition-colors">cymohmwaz@yahoo.com</a>
+                  </p>
+                  <p className="text-sm text-gray-300">Secure PayPal payments</p>
                 </div>
               </li>
               <li className="flex items-start">
                 <MapPin className="w-5 h-5 text-yellow-500 mr-3 mt-1" />
                 <div>
-                  <p>Jomo Kenyatta International Airport</p>
+                  <p className="font-medium">JKIA Airport Location</p>
+                  <p className="mt-1">Jomo Kenyatta International Airport</p>
                   <p className="text-sm text-gray-300">Nairobi, Kenya</p>
                 </div>
               </li>
@@ -100,24 +109,27 @@ const Footer = () => {
           </div>
           
           <div>
-            <h4 className="text-lg font-bold mb-6">Operating Hours</h4>
-            <p className="text-gray-300 mb-4">
-              We are available 24/7, 365 days a year to serve your transportation needs.
-            </p>
-            <div className="bg-blue-800 p-4 rounded-lg">
-              <p className="font-bold mb-2">Need a ride?</p>
+            <h4 className="text-lg font-bold mb-6">Secure Payment</h4>
+            <div className="bg-blue-800 p-4 rounded-lg mb-6">
+              <div className="flex items-center gap-2 mb-3">
+                <CreditCard className="h-5 w-5 text-yellow-500" />
+                <span className="font-bold">PayPal Secure Payment</span>
+              </div>
+              <p className="text-blue-100 text-sm mb-3">
+                We accept secure PayPal payments for your safety and convenience.
+              </p>
               <a 
-                href="tel:+254731050573" 
-                className="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold px-6 py-2 rounded-lg mt-3 inline-flex items-center gap-2 transition-colors"
-                aria-label="Call JKIA Express now"
+                href="/contact" 
+                className="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold px-4 py-2 rounded-lg inline-flex items-center gap-2 transition-colors text-sm"
+                aria-label="Book JKIA taxi with PayPal payment"
               >
-                <Phone size={16} />
-                Call Now
+                <Phone size={14} />
+                Book JKIA Taxi
               </a>
             </div>
             
-            <div className="mt-6">
-              <h5 className="font-bold mb-3">Follow Us</h5>
+            <div>
+              <h5 className="font-bold mb-3">Follow Best JKIA Taxi</h5>
               <a 
                 href="https://www.facebook.com/profile.php?id=61577234415707" 
                 target="_blank" 
@@ -125,7 +137,7 @@ const Footer = () => {
                 className="inline-flex items-center gap-2 text-gray-300 hover:text-yellow-500 transition-colors"
               >
                 <Facebook size={16} />
-                <span>Facebook Page</span>
+                <span>Best JKIA Taxi on Facebook</span>
                 <ExternalLink size={12} />
               </a>
             </div>
@@ -135,8 +147,8 @@ const Footer = () => {
         <div className="border-t border-blue-800 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-center md:text-left text-gray-400 mb-4 md:mb-0">
-              <p>&copy; {currentYear} JKIA Express. All rights reserved.</p>
-              <p className="text-sm mt-1">Licensed & Insured Professional Taxi Service</p>
+              <p>&copy; {currentYear} JKIA Express - Best JKIA Taxi Service. All rights reserved.</p>
+              <p className="text-sm mt-1">Licensed & Insured Professional Airport Taxi Service | PayPal Secure Payments</p>
             </div>
             <div className="flex flex-wrap gap-4 text-sm text-gray-400">
               <a href="/privacy" className="hover:text-yellow-500 transition-colors">Privacy Policy</a>

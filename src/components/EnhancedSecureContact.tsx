@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, Mail, MapPin, Send, CreditCard, Shield, AlertTriangle, CheckCircle, Star } from 'lucide-react';
+import { Phone, Mail, MapPin, Send, Shield, AlertTriangle, CheckCircle, Star } from 'lucide-react';
 import { SecurityUtils, CSRFProtection } from '../utils/security';
 import { ValidationUtils } from '../utils/validation';
 import { DatabaseService } from '../lib/database';
@@ -173,8 +173,8 @@ const EnhancedSecureContact = () => {
       // Facebook Pixel tracking
       if (typeof window !== 'undefined' && typeof (window as any).fbq !== 'undefined') {
         (window as any).fbq('track', 'Lead', {
-          content_name: 'Taxi Booking',
-          content_category: 'Transportation'
+          content_name: 'JKIA Taxi Booking',
+          content_category: 'Airport Transportation'
         });
       }
 
@@ -198,7 +198,7 @@ const EnhancedSecureContact = () => {
                 <div>
                   <h2 className="text-3xl font-bold text-green-600">Booking Confirmed!</h2>
                   <p className="text-gray-600 mt-2">
-                    Your booking has been successfully saved. We will contact you shortly to confirm your reservation.
+                    Your secure JKIA taxi booking has been successfully saved. We will contact you shortly with PayPal payment details.
                   </p>
                 </div>
               </div>
@@ -207,9 +207,10 @@ const EnhancedSecureContact = () => {
                 <h3 className="font-bold text-blue-900">What happens next?</h3>
                 <ul className="space-y-2 text-gray-600">
                   <li>• We'll call you within 30 minutes to confirm details</li>
-                  <li>• You'll receive an SMS confirmation with driver details</li>
+                  <li>• You'll receive a secure PayPal payment request via email</li>
+                  <li>• Complete payment through PayPal's secure platform</li>
                   <li>• Our driver will contact you 15 minutes before pickup</li>
-                  <li>• You can track your booking status in your account</li>
+                  <li>• Track your booking status in your account</li>
                 </ul>
               </div>
 
@@ -241,10 +242,10 @@ const EnhancedSecureContact = () => {
         <div className="text-center mb-16">
           <div className="flex items-center justify-center gap-2 mb-4">
             <Shield className="h-8 w-8 text-green-500" />
-            <h2 className="text-3xl md:text-4xl font-bold text-blue-900">Secure Booking</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-blue-900">Secure JKIA Taxi Booking</h2>
           </div>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Your information is protected with enterprise-grade security. Fill out the form below to book your taxi service.
+            Book your reliable JKIA airport transfer with secure PayPal payment. Best JKIA taxi service in Nairobi with trusted airport pickup.
           </p>
           
           {/* Trust Indicators */}
@@ -255,8 +256,8 @@ const EnhancedSecureContact = () => {
               ))}
               <span className="text-sm text-gray-600 ml-2">4.9/5 Rating</span>
             </div>
-            <div className="text-sm text-gray-600">150+ Happy Customers</div>
-            <div className="text-sm text-gray-600">Licensed & Insured</div>
+            <div className="text-sm text-gray-600">10,000+ Happy Customers</div>
+            <div className="text-sm text-gray-600">PayPal Secure Payments</div>
           </div>
 
           {!isOnline && (
@@ -272,7 +273,7 @@ const EnhancedSecureContact = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           <div className="lg:col-span-2">
             <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-200">
-              <h3 className="text-2xl font-bold text-blue-900 mb-6">Booking Request</h3>
+              <h3 className="text-2xl font-bold text-blue-900 mb-6">JKIA Airport Taxi Booking</h3>
               
               {errors.length > 0 && (
                 <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
@@ -352,7 +353,7 @@ const EnhancedSecureContact = () => {
                       maxLength={20}
                       value={formData.phone}
                       onChange={handleChange}
-                      placeholder="0712345678 or +254712345678"
+                      placeholder="0731050573 or +254731050573"
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent"
                       autoComplete="tel"
                       disabled={isSubmitting}
@@ -381,7 +382,7 @@ const EnhancedSecureContact = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="pickupLocation" className="block text-sm font-medium text-gray-700 mb-1">Pickup Location*</label>
+                    <label htmlFor="pickupLocation" className="block text-sm font-medium text-gray-700 mb-1">JKIA Pickup Location*</label>
                     <input
                       type="text"
                       id="pickupLocation"
@@ -390,13 +391,13 @@ const EnhancedSecureContact = () => {
                       maxLength={200}
                       value={formData.pickupLocation}
                       onChange={handleChange}
-                      placeholder="e.g., JKIA Terminal 1A"
+                      placeholder="e.g., JKIA Terminal 1A, Terminal 1B"
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent"
                       disabled={isSubmitting}
                     />
                   </div>
                   <div>
-                    <label htmlFor="dropoffLocation" className="block text-sm font-medium text-gray-700 mb-1">Dropoff Location*</label>
+                    <label htmlFor="dropoffLocation" className="block text-sm font-medium text-gray-700 mb-1">Nairobi Destination*</label>
                     <input
                       type="text"
                       id="dropoffLocation"
@@ -405,7 +406,7 @@ const EnhancedSecureContact = () => {
                       maxLength={200}
                       value={formData.dropoffLocation}
                       onChange={handleChange}
-                      placeholder="e.g., Nairobi CBD, Westlands"
+                      placeholder="e.g., Nairobi CBD, Westlands, Karen"
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent"
                       disabled={isSubmitting}
                     />
@@ -414,7 +415,7 @@ const EnhancedSecureContact = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="date" className="block text-sm font-medium text-gray-700 mb-1">Date*</label>
+                    <label htmlFor="date" className="block text-sm font-medium text-gray-700 mb-1">Travel Date*</label>
                     <input
                       type="date"
                       id="date"
@@ -429,7 +430,7 @@ const EnhancedSecureContact = () => {
                     />
                   </div>
                   <div>
-                    <label htmlFor="time" className="block text-sm font-medium text-gray-700 mb-1">Time*</label>
+                    <label htmlFor="time" className="block text-sm font-medium text-gray-700 mb-1">Pickup Time*</label>
                     <input
                       type="time"
                       id="time"
@@ -459,7 +460,7 @@ const EnhancedSecureContact = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Additional Information</label>
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Flight Details & Special Requirements</label>
                   <textarea
                     id="message"
                     name="message"
@@ -468,9 +469,19 @@ const EnhancedSecureContact = () => {
                     value={formData.message}
                     onChange={handleChange}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent"
-                    placeholder="Flight details, special requirements, etc."
+                    placeholder="Flight number, arrival time, special requirements, etc."
                     disabled={isSubmitting}
                   ></textarea>
+                </div>
+
+                <div className="bg-blue-50 p-4 rounded-lg">
+                  <h4 className="font-bold text-blue-900 mb-2">Payment Information</h4>
+                  <p className="text-sm text-gray-700 mb-2">
+                    After booking confirmation, you'll receive a secure PayPal payment request to complete your reservation.
+                  </p>
+                  <p className="text-xs text-gray-600">
+                    Payment processed through: cymohmwaz@yahoo.com
+                  </p>
                 </div>
 
                 <button
@@ -481,11 +492,11 @@ const EnhancedSecureContact = () => {
                   {isSubmitting ? (
                     <>
                       <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-900 mr-2"></div>
-                      Processing Secure Booking...
+                      Processing Secure JKIA Booking...
                     </>
                   ) : (
                     <>
-                      Secure Book Now
+                      Book Reliable JKIA Taxi Now
                       <Send size={18} className="ml-2" />
                     </>
                   )}
@@ -493,7 +504,7 @@ const EnhancedSecureContact = () => {
 
                 <div className="text-xs text-gray-500 mt-4 text-center">
                   <Shield className="inline h-4 w-4 mr-1" />
-                  Your information is encrypted and protected by enterprise-grade security measures.
+                  Your information is encrypted and protected. PayPal secure payment processing.
                 </div>
               </form>
             </div>
@@ -501,54 +512,60 @@ const EnhancedSecureContact = () => {
 
           <div>
             <div className="bg-blue-900 text-white p-8 rounded-lg shadow-lg h-full">
-              <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
+              <h3 className="text-2xl font-bold mb-6">JKIA Express Contact</h3>
               
               <div className="space-y-6">
                 <div className="flex items-start">
                   <Phone className="w-5 h-5 text-yellow-500 mr-4 mt-1" />
                   <div>
-                    <p className="font-medium">Phone Numbers</p>
+                    <p className="font-medium">24/7 JKIA Taxi Hotline</p>
                     <p className="mt-1">
-                      <a href="tel:+254731050573" className="hover:text-yellow-500 transition-colors">0731 050 573</a> (Primary)
+                      <a href="tel:+254731050573" className="hover:text-yellow-500 transition-colors text-lg font-bold">0731 050 573</a>
                     </p>
-                    <p>
-                      <a href="tel:+254745667165" className="hover:text-yellow-500 transition-colors">0745 667 165</a> (Alternative)
-                    </p>
+                    <p className="text-blue-200 text-sm">Best JKIA taxi service contact</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start">
                   <Mail className="w-5 h-5 text-yellow-500 mr-4 mt-1" />
                   <div>
-                    <p className="font-medium">Email</p>
+                    <p className="font-medium">Email & PayPal</p>
                     <p className="mt-1">
-                      <a href="mailto:info@jkiaexpress.co.ke" className="hover:text-yellow-500 transition-colors">info@jkiaexpress.co.ke</a>
+                      <a href="mailto:cymohmwaz@yahoo.com" className="hover:text-yellow-500 transition-colors">cymohmwaz@yahoo.com</a>
                     </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <CreditCard className="w-5 h-5 text-yellow-500 mr-4 mt-1" />
-                  <div>
-                    <p className="font-medium">Payment Methods</p>
-                    <p className="mt-1">M-Pesa Till: 123456</p>
-                    <p>Cash & Card Payments</p>
+                    <p className="text-blue-200 text-sm">Secure PayPal payments</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start">
                   <MapPin className="w-5 h-5 text-yellow-500 mr-4 mt-1" />
                   <div>
-                    <p className="font-medium">Location</p>
-                    <p className="mt-1">Jomo Kenyatta International Airport (JKIA), Nairobi, Kenya</p>
+                    <p className="font-medium">JKIA Airport Location</p>
+                    <p className="mt-1">Jomo Kenyatta International Airport, Nairobi, Kenya</p>
+                    <p className="text-blue-200 text-sm">Reliable airport transfer service</p>
                   </div>
                 </div>
               </div>
               
               <div className="mt-8 pt-8 border-t border-blue-800">
-                <h4 className="text-xl font-bold mb-4">Hours of Operation</h4>
-                <p className="mb-2">24 hours a day</p>
-                <p>7 days a week</p>
+                <h4 className="text-xl font-bold mb-4">24/7 JKIA Taxi Service</h4>
+                <p className="mb-2">Available 24 hours daily</p>
+                <p className="text-blue-200 text-sm">Trusted Nairobi airport taxi</p>
+              </div>
+
+              <div className="mt-8 pt-8 border-t border-blue-800">
+                <h4 className="text-lg font-bold mb-4">Follow JKIA Express</h4>
+                <a 
+                  href="https://www.facebook.com/profile.php?id=61577234415707" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-blue-200 hover:text-yellow-500 transition-colors"
+                >
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                  </svg>
+                  <span>Best JKIA Taxi on Facebook</span>
+                </a>
               </div>
               
               <div className="mt-8">
@@ -561,7 +578,7 @@ const EnhancedSecureContact = () => {
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                   className="rounded-lg"
-                  title="JKIA Location Map"
+                  title="JKIA Airport Taxi Location Map"
                 ></iframe>
               </div>
             </div>
