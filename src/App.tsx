@@ -15,6 +15,7 @@ const Faq = lazy(() => import('./components/Faq'));
 const EnhancedSecureContact = lazy(() => import('./components/EnhancedSecureContact'));
 const SecureAuth = lazy(() => import('./components/SecureAuth'));
 const UserDashboard = lazy(() => import('./components/UserDashboard'));
+const BookingSuccess = lazy(() => import('./components/BookingSuccess'));
 
 // Loading component
 const LoadingSpinner = () => (
@@ -44,6 +45,7 @@ function App() {
               <Route path="/contact" element={<EnhancedSecureContact />} />
               <Route path="/login" element={<SecureAuth />} />
               <Route path="/dashboard" element={<UserDashboard />} />
+              <Route path="/booking-success" element={<BookingSuccess />} />
             </Routes>
           </Suspense>
           <Footer />

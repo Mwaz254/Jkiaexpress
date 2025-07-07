@@ -3,7 +3,9 @@ import { Phone, Mail, MapPin, Send, Shield, AlertTriangle, CheckCircle, Star } f
 import { SecurityUtils, CSRFProtection } from '../utils/security';
 import { ValidationUtils } from '../utils/validation';
 import { DatabaseService } from '../lib/database';
+import { SMSService } from '../utils/sms';
 import { supabase } from '../lib/supabase';
+import PayPalPayment from './PayPalPayment';
 
 const EnhancedSecureContact = () => {
   const [formData, setFormData] = useState({
@@ -25,6 +27,8 @@ const EnhancedSecureContact = () => {
   const [honeypot, setHoneypot] = useState('');
   const [submitAttempts, setSubmitAttempts] = useState(0);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [showPayment, setShowPayment] = useState(false);
+  const [bookingId, setBookingId] = useState<string>('');
   const [user, setUser] = useState<any>(null);
   const [isOnline, setIsOnline] = useState(true);
 
@@ -82,6 +86,25 @@ const EnhancedSecureContact = () => {
     if (errors.length > 0) {
       setErrors([]);
     }
+  };
+
+  const calculateAmount = (): string => {
+    // Simple pricing calculation based on route
+    const baseRate = 2000; // Base rate for standard routes
+    let amount = baseRate;
+    
+    // Add expressway fee if selected
+    if (formData.expressway) {
+      amount += 300;
+    }
+    
+    // Adjust for passenger count
+    const passengers = parseInt(formData.passengers) || 1;
+    if (passengers > 4) {
+      amount += 1000; // SUV/Van surcharge
+    }
+    
+    return amount.toString();
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -143,40 +166,27 @@ const EnhancedSecureContact = () => {
         throw new Error('Failed to save booking. Please try again.');
       }
 
-      setSubmitSuccess(true);
-      
-      // Reset form
-      setFormData({
-        name: '',
-        email: user?.email || '',
-        phone: '',
-        pickupLocation: '',
-        dropoffLocation: '',
-        date: '',
-        time: '',
-        passengers: '',
-        message: '',
-        expressway: false
-      });
-
-      // Generate new CSRF token
-      const newToken = CSRFProtection.generateToken();
-      setCsrfToken(newToken);
-
-      // Track conversion for analytics
-      if (typeof window !== 'undefined' && typeof (window as any).gtag !== 'undefined') {
-        (window as any).gtag('event', 'conversion', {
-          'send_to': 'GA_TRACKING_ID/booking_completed'
+      // Send SMS notification
+      try {
+        await SMSService.sendBookingNotification({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          bookingDetails: {
+            pickup: formData.pickupLocation,
+            dropoff: formData.dropoffLocation,
+            date: formData.date,
+            time: formData.time,
+            passengers: parseInt(formData.passengers)
+          }
         });
+      } catch (smsError) {
+        console.warn('SMS notification failed:', smsError);
+        // Don't fail the booking if SMS fails
       }
 
-      // Facebook Pixel tracking
-      if (typeof window !== 'undefined' && typeof (window as any).fbq !== 'undefined') {
-        (window as any).fbq('track', 'Lead', {
-          content_name: 'JKIA Taxi Booking',
-          content_category: 'Airport Transportation'
-        });
-      }
+      setBookingId(data?.id || 'BOOK-' + Date.now());
+      setShowPayment(true);
 
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'An error occurred';
@@ -186,6 +196,70 @@ const EnhancedSecureContact = () => {
       setIsSubmitting(false);
     }
   };
+
+  const handlePaymentSuccess = (orderData: any) => {
+    setSubmitSuccess(true);
+    
+    // Track conversion for analytics
+    if (typeof window !== 'undefined' && typeof (window as any).gtag !== 'undefined') {
+      (window as any).gtag('event', 'conversion', {
+        'send_to': 'GA_TRACKING_ID/booking_completed'
+      });
+    }
+
+    // Facebook Pixel tracking
+    if (typeof window !== 'undefined' && typeof (window as any).fbq !== 'undefined') {
+      (window as any).fbq('track', 'Purchase', {
+        content_name: 'JKIA Taxi Booking',
+        content_category: 'Airport Transportation',
+        value: calculateAmount(),
+        currency: 'KES'
+      });
+    }
+
+    // Redirect to success page
+    window.location.href = `/booking-success?order=${orderData.id}`;
+  };
+
+  const handlePaymentError = (error: any) => {
+    setErrors(['Payment failed. Please try again or contact us directly.']);
+    setShowPayment(false);
+  };
+
+  if (showPayment) {
+    return (
+      <section id="contact" className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="max-w-2xl mx-auto">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-blue-900 mb-4">Complete Your Payment</h2>
+              <p className="text-gray-600">
+                Your booking has been created. Please complete the payment to confirm your reservation.
+              </p>
+            </div>
+            
+            <PayPalPayment
+              bookingId={bookingId}
+              amount={calculateAmount()}
+              currency="KES"
+              description={`JKIA Express: ${formData.pickupLocation} to ${formData.dropoffLocation}`}
+              onSuccess={handlePaymentSuccess}
+              onError={handlePaymentError}
+            />
+            
+            <div className="mt-6 text-center">
+              <button
+                onClick={() => setShowPayment(false)}
+                className="text-blue-900 hover:text-blue-800 font-medium"
+              >
+                ← Back to booking form
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   if (submitSuccess) {
     return (
@@ -198,7 +272,7 @@ const EnhancedSecureContact = () => {
                 <div>
                   <h2 className="text-3xl font-bold text-green-600">Booking Confirmed!</h2>
                   <p className="text-gray-600 mt-2">
-                    Your secure JKIA taxi booking has been successfully saved. We will contact you shortly with PayPal payment details.
+                    Your secure JKIA taxi booking has been successfully confirmed with PayPal payment.
                   </p>
                 </div>
               </div>
@@ -206,9 +280,8 @@ const EnhancedSecureContact = () => {
               <div className="space-y-4 text-left bg-gray-50 p-6 rounded-lg">
                 <h3 className="font-bold text-blue-900">What happens next?</h3>
                 <ul className="space-y-2 text-gray-600">
-                  <li>• We'll call you within 30 minutes to confirm details</li>
-                  <li>• You'll receive a secure PayPal payment request via email</li>
-                  <li>• Complete payment through PayPal's secure platform</li>
+                  <li>• SMS confirmation sent to +254731050573</li>
+                  <li>• You'll receive email confirmation with trip details</li>
                   <li>• Our driver will contact you 15 minutes before pickup</li>
                   <li>• Track your booking status in your account</li>
                 </ul>
@@ -216,7 +289,22 @@ const EnhancedSecureContact = () => {
 
               <div className="mt-6 flex flex-col sm:flex-row gap-4">
                 <button
-                  onClick={() => setSubmitSuccess(false)}
+                  onClick={() => {
+                    setSubmitSuccess(false);
+                    setShowPayment(false);
+                    setFormData({
+                      name: '',
+                      email: user?.email || '',
+                      phone: '',
+                      pickupLocation: '',
+                      dropoffLocation: '',
+                      date: '',
+                      time: '',
+                      passengers: '',
+                      message: '',
+                      expressway: false
+                    });
+                  }}
                   className="bg-blue-900 hover:bg-blue-800 text-white font-bold px-6 py-3 rounded-lg transition-all duration-300"
                 >
                   Make Another Booking
@@ -455,7 +543,7 @@ const EnhancedSecureContact = () => {
                     disabled={isSubmitting}
                   />
                   <label htmlFor="expressway" className="ml-2 block text-sm text-gray-700">
-                    Use Nairobi Expressway (Additional charges apply)
+                    Use Nairobi Expressway (+KES 300)
                   </label>
                 </div>
 
@@ -475,12 +563,13 @@ const EnhancedSecureContact = () => {
                 </div>
 
                 <div className="bg-blue-50 p-4 rounded-lg">
-                  <h4 className="font-bold text-blue-900 mb-2">Payment Information</h4>
-                  <p className="text-sm text-gray-700 mb-2">
-                    After booking confirmation, you'll receive a secure PayPal payment request to complete your reservation.
-                  </p>
-                  <p className="text-xs text-gray-600">
-                    Payment processed through: cymohmwaz@yahoo.com
+                  <h4 className="font-bold text-blue-900 mb-2">Estimated Cost</h4>
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-700">Total Amount:</span>
+                    <span className="text-2xl font-bold text-blue-900">KES {calculateAmount()}</span>
+                  </div>
+                  <p className="text-sm text-gray-600 mt-2">
+                    Payment will be processed securely through PayPal after booking confirmation.
                   </p>
                 </div>
 
@@ -496,7 +585,7 @@ const EnhancedSecureContact = () => {
                     </>
                   ) : (
                     <>
-                      Book Reliable JKIA Taxi Now
+                      Continue to Payment
                       <Send size={18} className="ml-2" />
                     </>
                   )}
