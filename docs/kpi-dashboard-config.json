@@ -1,0 +1,236 @@
+{
+  "dashboard_config": {
+    "title": "JKIAExpress KPI Dashboard",
+    "refresh_interval": 300,
+    "sections": [
+      {
+        "id": "technical_integration",
+        "title": "Section I: Technical Integration",
+        "metrics": [
+          {
+            "name": "SMS Delivery Rate",
+            "target": 98,
+            "current": 95.2,
+            "unit": "%",
+            "trend": "up",
+            "alert_threshold": 90,
+            "data_source": "africastalking_api"
+          },
+          {
+            "name": "SMS Cost per Message",
+            "target": 2.0,
+            "current": 1.85,
+            "unit": "KES",
+            "trend": "down",
+            "alert_threshold": 2.5,
+            "data_source": "africastalking_api"
+          },
+          {
+            "name": "PayPal Success Rate",
+            "target": 95,
+            "current": 97.3,
+            "unit": "%",
+            "trend": "up",
+            "alert_threshold": 90,
+            "data_source": "paypal_api"
+          },
+          {
+            "name": "Payment Processing Time",
+            "target": 60,
+            "current": 45,
+            "unit": "seconds",
+            "trend": "down",
+            "alert_threshold": 90,
+            "data_source": "paypal_api"
+          },
+          {
+            "name": "System Uptime",
+            "target": 99.9,
+            "current": 99.95,
+            "unit": "%",
+            "trend": "stable",
+            "alert_threshold": 99.5,
+            "data_source": "monitoring_system"
+          }
+        ]
+      },
+      {
+        "id": "strategic_partnerships",
+        "title": "Section II: Strategic Partnerships",
+        "metrics": [
+          {
+            "name": "Active Tour Operators",
+            "target": 10,
+            "current": 3,
+            "unit": "partners",
+            "trend": "up",
+            "alert_threshold": 5,
+            "data_source": "crm_system"
+          },
+          {
+            "name": "Partner Revenue Share",
+            "target": 25,
+            "current": 12,
+            "unit": "%",
+            "trend": "up",
+            "alert_threshold": 15,
+            "data_source": "booking_system"
+          },
+          {
+            "name": "Corporate Accounts",
+            "target": 25,
+            "current": 8,
+            "unit": "accounts",
+            "trend": "up",
+            "alert_threshold": 15,
+            "data_source": "crm_system"
+          },
+          {
+            "name": "Corporate Revenue Share",
+            "target": 35,
+            "current": 18,
+            "unit": "%",
+            "trend": "up",
+            "alert_threshold": 20,
+            "data_source": "booking_system"
+          },
+          {
+            "name": "Partner Satisfaction",
+            "target": 90,
+            "current": 88,
+            "unit": "%",
+            "trend": "stable",
+            "alert_threshold": 80,
+            "data_source": "survey_system"
+          }
+        ]
+      },
+      {
+        "id": "marketing_growth",
+        "title": "Section III: Marketing & Growth",
+        "metrics": [
+          {
+            "name": "Monthly Website Visitors",
+            "target": 50000,
+            "current": 28500,
+            "unit": "visitors",
+            "trend": "up",
+            "alert_threshold": 35000,
+            "data_source": "google_analytics"
+          },
+          {
+            "name": "Conversion Rate",
+            "target": 3.0,
+            "current": 2.4,
+            "unit": "%",
+            "trend": "up",
+            "alert_threshold": 2.0,
+            "data_source": "google_analytics"
+          },
+          {
+            "name": "Cost per Acquisition",
+            "target": 500,
+            "current": 650,
+            "unit": "KES",
+            "trend": "down",
+            "alert_threshold": 750,
+            "data_source": "marketing_platforms"
+          },
+          {
+            "name": "Customer Retention Rate",
+            "target": 60,
+            "current": 45,
+            "unit": "%",
+            "trend": "up",
+            "alert_threshold": 40,
+            "data_source": "crm_system"
+          },
+          {
+            "name": "Net Promoter Score",
+            "target": 70,
+            "current": 65,
+            "unit": "score",
+            "trend": "up",
+            "alert_threshold": 60,
+            "data_source": "survey_system"
+          },
+          {
+            "name": "Google My Business Rating",
+            "target": 4.8,
+            "current": 4.6,
+            "unit": "stars",
+            "trend": "up",
+            "alert_threshold": 4.5,
+            "data_source": "google_my_business"
+          }
+        ]
+      }
+    ],
+    "alerts": [
+      {
+        "type": "critical",
+        "condition": "sms_delivery_rate < 90",
+        "action": "immediate_notification",
+        "recipients": ["admin@jkiaexpress.taxi", "+254731050573"]
+      },
+      {
+        "type": "warning",
+        "condition": "paypal_success_rate < 90",
+        "action": "email_notification",
+        "recipients": ["tech@jkiaexpress.taxi"]
+      },
+      {
+        "type": "info",
+        "condition": "monthly_target_variance > 10",
+        "action": "weekly_report",
+        "recipients": ["management@jkiaexpress.taxi"]
+      }
+    ],
+    "reports": {
+      "daily": {
+        "time": "09:00",
+        "recipients": ["operations@jkiaexpress.taxi"],
+        "metrics": ["sms_delivery", "paypal_transactions", "bookings", "revenue"]
+      },
+      "weekly": {
+        "day": "monday",
+        "time": "08:00",
+        "recipients": ["management@jkiaexpress.taxi"],
+        "metrics": ["all_kpis", "budget_variance", "partnership_performance"]
+      },
+      "monthly": {
+        "day": 1,
+        "time": "09:00",
+        "recipients": ["executives@jkiaexpress.taxi"],
+        "metrics": ["comprehensive_analysis", "roi_assessment", "strategic_recommendations"]
+      }
+    }
+  },
+  "integration_endpoints": {
+    "africastalking": {
+      "base_url": "https://api.africastalking.com",
+      "metrics_endpoint": "/version1/user",
+      "auth_method": "api_key"
+    },
+    "paypal": {
+      "base_url": "https://api-m.paypal.com",
+      "metrics_endpoint": "/v1/reporting/transactions",
+      "auth_method": "oauth2"
+    },
+    "google_analytics": {
+      "property_id": "GA_PROPERTY_ID",
+      "metrics_endpoint": "/v4/reports:batchGet",
+      "auth_method": "service_account"
+    },
+    "google_my_business": {
+      "account_id": "GMB_ACCOUNT_ID",
+      "metrics_endpoint": "/v4/accounts/{accountId}/locations",
+      "auth_method": "oauth2"
+    }
+  },
+  "data_retention": {
+    "raw_data": "90_days",
+    "aggregated_data": "2_years",
+    "reports": "5_years"
+  }
+}
